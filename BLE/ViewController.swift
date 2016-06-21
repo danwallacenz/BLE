@@ -28,20 +28,20 @@ class ViewController: UIViewController, UIInterface {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func startButtonPressed(sender: UIButton) {
+    @IBAction func startButtonPressed(_ sender: UIButton) {
         mPresenter?.onStartButtonPressed()
     }
     
-    func enableStartButton(enable: Bool){
-        startButton.enabled = enable
+    func enableStartButton(_ enable: Bool){
+        startButton.isEnabled = enable
     }
 
-    @IBAction func stopButtonPressed(sender: UIButton) {
+    @IBAction func stopButtonPressed(_ sender: UIButton) {
          mPresenter?.onStopButtonPressed()
     }
 
-    func enableStopButton(enable: Bool){
-        stopButton.enabled = enable
+    func enableStopButton(_ enable: Bool){
+        stopButton.isEnabled = enable
     }
 }
 

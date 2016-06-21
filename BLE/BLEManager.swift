@@ -39,7 +39,7 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     func start(){
         print("starting scanning")
-        centralManager.scanForPeripheralsWithServices(nil, options: nil)
+        centralManager.scanForPeripherals(withServices: nil, options: nil)
     }
     
     func stop(){
@@ -48,71 +48,71 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     
     // MARK: CBCentralManagerDelegate
-    func centralManagerDidUpdateState(central: CBCentralManager) {
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
         print("centralManagerDidUpdateState")
     }
     
-    func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : AnyObject], rssi RSSI: NSNumber) {
         
         guard let peripheralName = advertisementData["kCBAdvDataLocalName"] as? String else {return}
-        print("discovered: \(peripheralName) : \(peripheral.identifier.UUIDString)")
+        print("discovered: \(peripheralName) : \(peripheral.identifier.uuidString)")
         
-        if peripheralName.containsString(SENSOR_TAG_NAME) {
+        if peripheralName.contains(SENSOR_TAG_NAME) {
             // save a reference to the sensor tag
             sensorTag = peripheral
             sensorTag!.delegate = self
             // Request a connection to the peripheral
             print("attempting to connect to Sensor Tag")
-            centralManager.connectPeripheral(sensorTag!, options: nil)
+            centralManager.connect(sensorTag!, options: nil)
             stop()
         }
     }
     
-    func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("didConnectPeripheral")
         peripheral.discoverServices(nil)
     }
     
-    func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
+    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: NSError?) {
         print("didFailToConnectPeripheral")
     }
     
-    func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
         print("didDisconnectPeripheral")
     }
     
     // MARK: CBPeripheralDelegate
-    func peripheral(peripheral: CBPeripheral, didDiscoverServices error: NSError?) {
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: NSError?) {
         print("didDiscoverServices")
         if let services = peripheral.services {
             for service in services {
-                print("discovered service: \(service.UUID)")
+                print("discovered service: \(service.uuid)")
                 
-                if service.UUID .isEqual(CBUUID(string: UUID_TEMPERATURE_SERVICE)) {
-                    peripheral.discoverCharacteristics(nil, forService: service)
+                if service.uuid .isEqual(CBUUID(string: UUID_TEMPERATURE_SERVICE)) {
+                    peripheral.discoverCharacteristics(nil, for: service)
                 }
             }
         }
     }
     
-    func peripheral(peripheral: CBPeripheral, didDiscoverCharacteristicsForService service: CBService, error: NSError?) {
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: NSError?) {
         print("didDiscoverCharacteristicsForService")
         
         if let chracteristics = service.characteristics {
             for characteristic in chracteristics {
-                print("discovered characteristic: \(characteristic.UUID) for service: \(service.UUID)")
+                print("discovered characteristic: \(characteristic.uuid) for service: \(service.uuid)")
                 // Temperature
-                if characteristic.UUID .isEqual(CBUUID(string: UUID_TEMPERATURE_DATA)) {
+                if characteristic.uuid .isEqual(CBUUID(string: UUID_TEMPERATURE_DATA)) {
                     // Enable Temperature Sensor notification
-                    self.sensorTag?.setNotifyValue(true, forCharacteristic: characteristic)
+                    self.sensorTag?.setNotifyValue(true, for: characteristic)
                     print("discovered temperature data characteristic")
                 }
-                if characteristic.UUID .isEqual(CBUUID(string: UUID_TEMPERATURE_CONFIG)) {
+                if characteristic.uuid .isEqual(CBUUID(string: UUID_TEMPERATURE_CONFIG)) {
                     // Enable Temperature Sensor
                     var enableValue:UInt8 = 1
-                    let enableBytes = NSData(bytes: &enableValue, length: sizeof(UInt8))
+                    let enableBytes = Data(bytes: UnsafePointer<UInt8>(&enableValue), count: sizeof(UInt8))
 
-                    sensorTag?.writeValue(enableBytes, forCharacteristic: characteristic, type: CBCharacteristicWriteType.WithResponse)
+                    sensorTag?.writeValue(enableBytes, for: characteristic, type: CBCharacteristicWriteType.withResponse)
 
                     print("discovered temperature config characteristic")
                 }
@@ -120,7 +120,7 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         }
     }
     
-    func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: NSError?) {
         print("didUpdateValueForCharacteristic")
         if let error = error {
             print("error:\(error.localizedDescription)")
@@ -129,10 +129,10 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             // extract the data from the characteristic's value property and display the value based on the characteristic type
             let data = characteristic.value
             var rawData : UInt16 = 0
-            data?.getBytes(&rawData, length: sizeof(UInt16));
+            (data as NSData?)?.getBytes(&rawData, length: sizeof(UInt16));
             let lower = 0x00FF & rawData;
             let upper = rawData>>8
-            print("temperature data: \(data) for characteristic: \(characteristic.UUID)")
+            print("temperature data: \(data) for characteristic: \(characteristic.uuid)")
             print("temperature lower: \(lower) upper: \(upper)")
         }
         

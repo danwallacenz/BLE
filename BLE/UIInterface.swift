@@ -10,6 +10,6 @@ import Foundation
 
 protocol UIInterface: class {
     
-    func enableStartButton(enable: Bool)
-    func enableStopButton(enable: Bool)
+    func enableStartButton(_ enable: Bool)
+    func enableStopButton(_ enable: Bool)
 }

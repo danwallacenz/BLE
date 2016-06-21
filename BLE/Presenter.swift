@@ -13,7 +13,7 @@ class Presenter {
     weak var ui: UIInterface? = nil
     let  bluetoothManager = BLEManager()
     
-    func onCreate(ui:UIInterface) -> Presenter {
+    func onCreate(_ ui:UIInterface) -> Presenter {
         self.ui = ui
         ui.enableStopButton(false)
         return self
