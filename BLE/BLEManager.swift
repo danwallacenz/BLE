@@ -9,7 +9,7 @@
 import Foundation
 import CoreBluetooth
 
-class BLEManager: NSObject, CBCentralManagerDelegate {
+class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     let SENSOR_TAG_NAME = "SensorTag"
     var centralManager:CBCentralManager!
@@ -41,15 +41,17 @@ class BLEManager: NSObject, CBCentralManagerDelegate {
         if peripheralName.containsString(SENSOR_TAG_NAME) {
             // save a reference to the sensor tag
             sensorTag = peripheral
-//            sensorTag.delegate = self
+            sensorTag!.delegate = self
             // Request a connection to the peripheral
             print("attempting to connect to Sensor Tag")
             centralManager.connectPeripheral(sensorTag!, options: nil)
+            stop()
         }
     }
     
     func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
         print("didConnectPeripheral")
+        peripheral.discoverServices(nil)
     }
     
     func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
@@ -58,5 +60,25 @@ class BLEManager: NSObject, CBCentralManagerDelegate {
     
     func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
         print("didDisconnectPeripheral")
+    }
+    
+    // MARK: CBPeripheralDelegate
+    func peripheral(peripheral: CBPeripheral, didDiscoverServices error: NSError?) {
+        print("didDiscoverServices")
+        if let services = peripheral.services {
+            for service in services {
+                peripheral.discoverCharacteristics(nil, forService: service)
+            }
+        }
+    }
+    
+    func peripheral(peripheral: CBPeripheral, didDiscoverCharacteristicsForService service: CBService, error: NSError?) {
+        print("didDiscoverCharacteristicsForService")
+        
+        if let chracteristics = service.characteristics {
+            for characteristic in chracteristics {
+                print("\(characteristic.UUID)")
+            }
+        }
     }
 }
