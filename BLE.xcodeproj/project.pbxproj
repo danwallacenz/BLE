@@ -16,6 +16,7 @@
 		3C26C67F1D18D4CF0080EA44 /* BLEUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26C67E1D18D4CF0080EA44 /* BLEUITests.swift */; };
 		3C26C68D1D18D5010080EA44 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26C68C1D18D5010080EA44 /* Presenter.swift */; };
 		3C26C68F1D18D6940080EA44 /* UIInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26C68E1D18D6940080EA44 /* UIInterface.swift */; };
+		3C26C6921D18E4EA0080EA44 /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26C6911D18E4EA0080EA44 /* BLEManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		3C26C6801D18D4CF0080EA44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C26C68C1D18D5010080EA44 /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		3C26C68E1D18D6940080EA44 /* UIInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIInterface.swift; sourceTree = "<group>"; };
+		3C26C6911D18E4EA0080EA44 /* BLEManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		3C26C65D1D18D4CF0080EA44 /* BLE */ = {
 			isa = PBXGroup;
 			children = (
+				3C26C6901D18E4D40080EA44 /* Bluetooth */,
 				3C26C65E1D18D4CF0080EA44 /* AppDelegate.swift */,
 				3C26C6601D18D4CF0080EA44 /* ViewController.swift */,
 				3C26C68C1D18D5010080EA44 /* Presenter.swift */,
@@ -129,6 +132,14 @@
 				3C26C6801D18D4CF0080EA44 /* Info.plist */,
 			);
 			path = BLEUITests;
+			sourceTree = "<group>";
+		};
+		3C26C6901D18E4D40080EA44 /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				3C26C6911D18E4EA0080EA44 /* BLEManager.swift */,
+			);
+			name = Bluetooth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +275,7 @@
 			files = (
 				3C26C68D1D18D5010080EA44 /* Presenter.swift in Sources */,
 				3C26C6611D18D4CF0080EA44 /* ViewController.swift in Sources */,
+				3C26C6921D18E4EA0080EA44 /* BLEManager.swift in Sources */,
 				3C26C65F1D18D4CF0080EA44 /* AppDelegate.swift in Sources */,
 				3C26C68F1D18D6940080EA44 /* UIInterface.swift in Sources */,
 			);
