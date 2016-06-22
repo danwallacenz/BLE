@@ -16,6 +16,9 @@ class ViewController: UIViewController, UIInterface {
     @IBOutlet weak var infraredTemperatureLabel: UILabel!
     @IBOutlet weak var ambientTemperatureLabel: UILabel!
     
+    @IBOutlet weak var bluetoothStatusLabel: UILabel!
+    @IBOutlet weak var bluetoothErrorLabel: UILabel!
+    
     var mPresenter:Presenter?
     
     override func viewDidLoad() {
@@ -48,8 +51,6 @@ class ViewController: UIViewController, UIInterface {
     }
     
     func displayAmbient(temperature: Double) {
-        print("ambient temp is \(round(10 * temperature) / 10)º C") // 1 decimal place
-        
         let roundedTemp = round(10 * temperature) / 10 // 1 decimal place
         ambientTemperatureLabel.text = "\(roundedTemp)"
     }
@@ -60,10 +61,10 @@ class ViewController: UIViewController, UIInterface {
     }
     
     func display(error: String) {
-        //
+        bluetoothErrorLabel.text = error
     }
     
     func display(status: String) {
-        //
+        bluetoothStatusLabel.text = status
     }
 }
