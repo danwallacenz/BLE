@@ -12,6 +12,10 @@ class ViewController: UIViewController, UIInterface {
 
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
+    
+    @IBOutlet weak var infraredTemperatureLabel: UILabel!
+    @IBOutlet weak var ambientTemperatureLabel: UILabel!
+    
     var mPresenter:Presenter?
     
     override func viewDidLoad() {
@@ -45,10 +49,13 @@ class ViewController: UIViewController, UIInterface {
     
     func displayAmbient(temperature: Double) {
         print("ambient temp is \(round(10 * temperature) / 10)º C") // 1 decimal place
+        
+        let roundedTemp = round(10 * temperature) / 10 // 1 decimal place
+        ambientTemperatureLabel.text = "\(roundedTemp)"
     }
     
     func displayInfrared(temperature: Double) {
-         print("infrared temp is \(round(10 * temperature) / 10)º C")
+        let roundedTemp = round(10 * temperature) / 10
+        infraredTemperatureLabel.text = "\(roundedTemp)"
     }
 }
-

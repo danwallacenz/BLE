@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="lXx-im-3E5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11129.15" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lXx-im-3E5">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11103.10"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--BLE-->
@@ -16,38 +17,82 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8dM-dC-AwX">
-                                <rect key="frame" x="340" y="72" width="240" height="30"/>
-                                <color key="backgroundColor" red="0.87881640188432419" green="0.92435645724258286" blue="0.81210888775516676" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.87881640188432419" green="0.92435645724258286" blue="0.81210888775516676" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Stop"/>
                                 <connections>
                                     <action selector="stopButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H2f-Ro-oi8"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zg8-13-ceR">
-                                <rect key="frame" x="20" y="72" width="240" height="30"/>
-                                <color key="backgroundColor" red="0.87881640188432419" green="0.92435645724258286" blue="0.81210888775516676" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.87881640188432419" green="0.92435645724258286" blue="0.81210888775516676" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Start"/>
                                 <connections>
                                     <action selector="startButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bHh-mu-2sW"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Igy-Zd-D4a">
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Infrared" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="59d-qe-Uez">
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ambient" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFe-qK-eP6">
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A4C-IX-gIr">
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1L-kI-7JN">
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="A4C-IX-gIr" firstAttribute="leading" secondItem="8dM-dC-AwX" secondAttribute="leading" id="2y2-gF-jew"/>
                             <constraint firstItem="8dM-dC-AwX" firstAttribute="width" secondItem="zg8-13-ceR" secondAttribute="width" id="306-hb-ZOD"/>
+                            <constraint firstItem="MFe-qK-eP6" firstAttribute="top" secondItem="59d-qe-Uez" secondAttribute="bottom" constant="8" id="6Mb-bI-cWW"/>
+                            <constraint firstItem="Igy-Zd-D4a" firstAttribute="top" secondItem="zg8-13-ceR" secondAttribute="bottom" constant="8" symbolic="YES" id="6aS-CL-Teh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Igy-Zd-D4a" secondAttribute="trailing" id="7WV-E8-x2y"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8dM-dC-AwX" secondAttribute="trailing" id="9WF-vR-ug1"/>
+                            <constraint firstItem="59d-qe-Uez" firstAttribute="trailing" secondItem="MFe-qK-eP6" secondAttribute="trailing" symbolic="YES" id="Ikf-mg-Yo8"/>
+                            <constraint firstItem="zg8-13-ceR" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.1" id="KED-lu-hJW"/>
+                            <constraint firstItem="v1L-kI-7JN" firstAttribute="leading" secondItem="A4C-IX-gIr" secondAttribute="leading" id="OpN-kj-Wm9"/>
+                            <constraint firstItem="A4C-IX-gIr" firstAttribute="baseline" secondItem="59d-qe-Uez" secondAttribute="baseline" id="Q5u-Cd-PS0"/>
+                            <constraint firstItem="59d-qe-Uez" firstAttribute="trailing" secondItem="zg8-13-ceR" secondAttribute="trailing" id="RGv-F4-Rz6"/>
+                            <constraint firstItem="v1L-kI-7JN" firstAttribute="baseline" secondItem="MFe-qK-eP6" secondAttribute="baseline" id="non-th-Dyf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Igy-Zd-D4a" secondAttribute="trailing" id="np8-tJ-Zxx"/>
+                            <constraint firstItem="8dM-dC-AwX" firstAttribute="height" secondItem="zg8-13-ceR" secondAttribute="height" id="r1t-pG-bmM"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Igy-Zd-D4a" secondAttribute="leading" id="sLh-a8-boR"/>
                             <constraint firstItem="8dM-dC-AwX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="sg4-Lt-67h"/>
                             <constraint firstItem="zg8-13-ceR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="xKs-li-zXL"/>
+                            <constraint firstItem="59d-qe-Uez" firstAttribute="top" secondItem="Igy-Zd-D4a" secondAttribute="bottom" constant="8" symbolic="YES" id="xjP-rB-xfs"/>
                             <constraint firstItem="zg8-13-ceR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="z7g-Vj-xru"/>
                             <constraint firstItem="zg8-13-ceR" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.4" id="zzE-3g-gKz"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="7WV-E8-x2y"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="BLE" id="8CX-We-gvI"/>
                     <connections>
+                        <outlet property="ambientTemperatureLabel" destination="v1L-kI-7JN" id="cHY-7K-fFw"/>
+                        <outlet property="infraredTemperatureLabel" destination="A4C-IX-gIr" id="WoR-7o-P2p"/>
                         <outlet property="startButton" destination="zg8-13-ceR" id="MiU-Y4-cTf"/>
                         <outlet property="stopButton" destination="8dM-dC-AwX" id="XEq-DR-8ex"/>
                     </connections>

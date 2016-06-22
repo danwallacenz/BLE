@@ -32,7 +32,6 @@ class Presenter: SensorTagDelegate {
         sensorTag.stop()
     }
     
-    
     // MARK: SensorTagDelegate
     func on(temperature: (ambient: Double, infrared: Double)) {
         ui?.displayAmbient(temperature: temperature.ambient)
