@@ -44,18 +44,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ambient" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFe-qK-eP6">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ambient" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFe-qK-eP6">
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A4C-IX-gIr">
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="temperature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A4C-IX-gIr">
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1L-kI-7JN">
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="temperature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1L-kI-7JN">
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -65,25 +65,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VTe-bK-0Ib">
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="0.1307601253" blue="0.19443640649999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="A4C-IX-gIr" firstAttribute="leading" secondItem="8dM-dC-AwX" secondAttribute="leading" id="2y2-gF-jew"/>
                             <constraint firstItem="8dM-dC-AwX" firstAttribute="width" secondItem="zg8-13-ceR" secondAttribute="width" id="306-hb-ZOD"/>
-                            <constraint firstItem="MFe-qK-eP6" firstAttribute="top" secondItem="59d-qe-Uez" secondAttribute="bottom" constant="8" id="6Mb-bI-cWW"/>
                             <constraint firstItem="Igy-Zd-D4a" firstAttribute="top" secondItem="zg8-13-ceR" secondAttribute="bottom" constant="8" symbolic="YES" id="6aS-CL-Teh"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Igy-Zd-D4a" secondAttribute="trailing" id="7WV-E8-x2y"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8dM-dC-AwX" secondAttribute="trailing" id="9WF-vR-ug1"/>
-                            <constraint firstItem="VTe-bK-0Ib" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="CTU-ml-0w3"/>
+                            <constraint firstItem="v1L-kI-7JN" firstAttribute="top" secondItem="A4C-IX-gIr" secondAttribute="bottom" constant="8" symbolic="YES" id="Bxn-he-Ngw"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="SHM-af-9hM" secondAttribute="bottom" constant="8" symbolic="YES" id="HQP-GU-Jva"/>
                             <constraint firstItem="59d-qe-Uez" firstAttribute="trailing" secondItem="MFe-qK-eP6" secondAttribute="trailing" symbolic="YES" id="Ikf-mg-Yo8"/>
                             <constraint firstItem="zg8-13-ceR" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.1" id="KED-lu-hJW"/>
-                            <constraint firstItem="VTe-bK-0Ib" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="KgE-Y7-rwK"/>
+                            <constraint firstItem="A4C-IX-gIr" firstAttribute="top" secondItem="Igy-Zd-D4a" secondAttribute="bottom" constant="8" symbolic="YES" id="KXm-SH-gPr"/>
                             <constraint firstItem="v1L-kI-7JN" firstAttribute="leading" secondItem="A4C-IX-gIr" secondAttribute="leading" id="OpN-kj-Wm9"/>
                             <constraint firstItem="A4C-IX-gIr" firstAttribute="baseline" secondItem="59d-qe-Uez" secondAttribute="baseline" id="Q5u-Cd-PS0"/>
                             <constraint firstItem="59d-qe-Uez" firstAttribute="trailing" secondItem="zg8-13-ceR" secondAttribute="trailing" id="RGv-F4-Rz6"/>
@@ -94,22 +86,15 @@
                             <constraint firstItem="8dM-dC-AwX" firstAttribute="height" secondItem="zg8-13-ceR" secondAttribute="height" id="r1t-pG-bmM"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Igy-Zd-D4a" secondAttribute="leading" id="sLh-a8-boR"/>
                             <constraint firstItem="8dM-dC-AwX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="sg4-Lt-67h"/>
+                            <constraint firstItem="A4C-IX-gIr" firstAttribute="leading" secondItem="59d-qe-Uez" secondAttribute="trailing" constant="8" symbolic="YES" id="uKt-Cq-I0t"/>
                             <constraint firstItem="zg8-13-ceR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="xKs-li-zXL"/>
-                            <constraint firstItem="59d-qe-Uez" firstAttribute="top" secondItem="Igy-Zd-D4a" secondAttribute="bottom" constant="8" symbolic="YES" id="xjP-rB-xfs"/>
                             <constraint firstItem="zg8-13-ceR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="z7g-Vj-xru"/>
-                            <constraint firstItem="SHM-af-9hM" firstAttribute="top" secondItem="VTe-bK-0Ib" secondAttribute="bottom" constant="8" symbolic="YES" id="zSo-Li-JwW"/>
                             <constraint firstItem="zg8-13-ceR" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.4" id="zzE-3g-gKz"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="7WV-E8-x2y"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="BLE" id="8CX-We-gvI"/>
                     <connections>
                         <outlet property="ambientTemperatureLabel" destination="v1L-kI-7JN" id="cHY-7K-fFw"/>
-                        <outlet property="bluetoothErrorLabel" destination="VTe-bK-0Ib" id="teY-qF-Hg1"/>
                         <outlet property="bluetoothStatusLabel" destination="SHM-af-9hM" id="vdx-XF-6wG"/>
                         <outlet property="infraredTemperatureLabel" destination="A4C-IX-gIr" id="WoR-7o-P2p"/>
                         <outlet property="startButton" destination="zg8-13-ceR" id="MiU-Y4-cTf"/>

@@ -52,19 +52,21 @@ class ViewController: UIViewController, UIInterface {
     
     func displayAmbient(temperature: Double) {
         let roundedTemp = round(10 * temperature) / 10 // 1 decimal place
-        ambientTemperatureLabel.text = "\(roundedTemp)"
+        ambientTemperatureLabel.text = "\(roundedTemp)º C"
     }
     
     func displayInfrared(temperature: Double) {
         let roundedTemp = round(10 * temperature) / 10
-        infraredTemperatureLabel.text = "\(roundedTemp)"
+        infraredTemperatureLabel.text = "\(roundedTemp)º C"
     }
     
     func display(error: String) {
-        bluetoothErrorLabel.text = error
+        bluetoothStatusLabel.text = error
+        bluetoothStatusLabel.textColor = #colorLiteral(red: 1, green: 0.1307601253, blue: 0.1944364065, alpha: 1)
     }
     
     func display(status: String) {
         bluetoothStatusLabel.text = status
+        bluetoothStatusLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     }
 }
