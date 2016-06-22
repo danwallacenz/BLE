@@ -10,4 +10,6 @@ import Foundation
 
 protocol SensorTagDelegate {
     func on(temperature: (ambient: Double, infrared: Double))
+    func on(error msg: String)
+    func on(status msg: String)
 }

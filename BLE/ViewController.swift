@@ -58,4 +58,12 @@ class ViewController: UIViewController, UIInterface {
         let roundedTemp = round(10 * temperature) / 10
         infraredTemperatureLabel.text = "\(roundedTemp)"
     }
+    
+    func display(error: String) {
+        //
+    }
+    
+    func display(status: String) {
+        //
+    }
 }

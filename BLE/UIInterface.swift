@@ -14,4 +14,6 @@ protocol UIInterface: class {
     func enableStopButton(_ enable: Bool)
     func displayAmbient(temperature: Double)
     func displayInfrared(temperature: Double)
+    func display(status: String)
+    func display(error: String)
 }

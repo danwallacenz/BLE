@@ -37,4 +37,12 @@ class Presenter: SensorTagDelegate {
         ui?.displayAmbient(temperature: temperature.ambient)
         ui?.displayInfrared(temperature: temperature.infrared)
     }
+    
+    func on(error msg: String) {
+        ui?.display(error: msg)
+    }
+    
+    func on(status msg: String) {
+        ui?.display(status: msg)
+    }
 }

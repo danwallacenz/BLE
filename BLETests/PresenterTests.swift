@@ -38,6 +38,12 @@ class PresenterTests: XCTestCase {
         var displayInfraredTemperatureWasCalled = false
         var displayInfraredTemperatureArgument:Double = -99.9
         
+        var displayErrorWasCalled = false
+        var displayErrorArgument:String = "dummy"
+        
+        var displayStatusWasCalled = false
+        var displayStatusArgument:String = "dummy"
+        
         func enableStartButton(_ enable: Bool){
             enableStartButtonWasCalled = true
             enableStartButtonArgument = enable
@@ -56,6 +62,17 @@ class PresenterTests: XCTestCase {
             displayInfraredTemperatureWasCalled = true
             displayInfraredTemperatureArgument = temperature
         }
+        
+        func display(error: String) {
+            displayErrorWasCalled = true
+            displayErrorArgument = error
+        }
+        
+        func display(status: String) {
+            displayStatusWasCalled = true
+            displayStatusArgument = status
+        }
+        
     }
     
     var mockSensorTag:MockSensorTag!
@@ -127,5 +144,25 @@ class PresenterTests: XCTestCase {
         XCTAssertEqual(mockView.displayAmbientTemperatureArgument, ambientTemp)
         XCTAssertTrue(mockView.displayInfraredTemperatureWasCalled)
         XCTAssertEqual(mockView.displayInfraredTemperatureArgument, infraredTemp)
+    }
+    
+    func testOnError() {
+        // given
+        let errorMsg = "Error"
+        // when
+        presenter.on(error: errorMsg)
+        // then
+        XCTAssertTrue(mockView.displayErrorWasCalled)
+        XCTAssertEqual(errorMsg, mockView.displayErrorArgument)
+    }
+    
+    func testOnStatus() {
+        // given
+        let statusMsg = "Status"
+        // when
+        presenter.on(status: statusMsg)
+        // then
+        XCTAssertTrue(mockView.displayStatusWasCalled)
+        XCTAssertEqual(statusMsg, mockView.displayStatusArgument)
     }
 }
