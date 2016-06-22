@@ -1,5 +1,5 @@
 //
-//  SensorTag.swift
+//  SensorTagDelegate.swift
 //  BLE
 //
 //  Created by Daniel Wallace on 22/06/16.
@@ -8,8 +8,6 @@
 
 import Foundation
 
-protocol SensorTag {
-    func start()
-    func stop()
-    var delegate: SensorTagDelegate? { get set }
+protocol SensorTagDelegate {
+    func on(temperature: (ambient: Double, infrared: Double))
 }

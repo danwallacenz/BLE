@@ -12,4 +12,6 @@ protocol UIInterface: class {
     
     func enableStartButton(_ enable: Bool)
     func enableStopButton(_ enable: Bool)
+    func displayAmbient(temperature: Double)
+    func displayInfrared(temperature: Double)
 }

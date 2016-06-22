@@ -20,7 +20,6 @@ class ViewController: UIViewController, UIInterface {
         
         let presenter = Presenter()
         mPresenter = presenter.onCreate(self)
-        print("")
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,6 +41,14 @@ class ViewController: UIViewController, UIInterface {
 
     func enableStopButton(_ enable: Bool){
         stopButton.isEnabled = enable
+    }
+    
+    func displayAmbient(temperature: Double) {
+        print("ambient temp is \(round(10 * temperature) / 10)º C") // 1 decimal place
+    }
+    
+    func displayInfrared(temperature: Double) {
+         print("infrared temp is \(round(10 * temperature) / 10)º C")
     }
 }
 

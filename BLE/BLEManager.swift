@@ -31,6 +31,8 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Sens
     var centralManager:CBCentralManager!
     var sensorTag: CBPeripheral?
     
+    var delegate: SensorTagDelegate?
+    
      override init() {
         super.init()
         centralManager = CBCentralManager(delegate: self, queue: nil)
@@ -127,8 +129,9 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Sens
             // extract the data from the characteristic's value property and display the value based on the characteristic type
             if let data = characteristic.value {
                 let temperatures = temperature(from: data)
-                print("ambient temp is \(round(10 * temperatures.ambient) / 10))º C") // 1 decimal place
-                print("infrared temp is \(round(10 * temperatures.infrared) / 10)º C")
+                delegate?.on(temperature: temperatures)
+//                print("ambient temp is \(round(10 * temperatures.ambient) / 10))º C") // 1 decimal place
+//                print("infrared temp is \(round(10 * temperatures.infrared) / 10)º C")
             }
         }
     }

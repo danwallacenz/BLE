@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Presenter {
+class Presenter: SensorTagDelegate {
     
     weak var ui: UIInterface? = nil
     var sensorTag:SensorTag = BLEManager()
@@ -16,6 +16,7 @@ class Presenter {
     func onCreate(_ ui:UIInterface) -> Presenter {
         self.ui = ui
         ui.enableStopButton(false)
+        sensorTag.delegate = self
         return self
     }
     
@@ -29,5 +30,12 @@ class Presenter {
         ui?.enableStartButton(true)
         ui?.enableStopButton(false)
         sensorTag.stop()
+    }
+    
+    
+    // MARK: SensorTagDelegate
+    func on(temperature: (ambient: Double, infrared: Double)) {
+        ui?.displayAmbient(temperature: temperature.ambient)
+        ui?.displayInfrared(temperature: temperature.infrared)
     }
 }

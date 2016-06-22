@@ -13,6 +13,7 @@ class PresenterTests: XCTestCase {
     
     class MockSensorTag:SensorTag {
         
+        var delegate: SensorTagDelegate?
         var startWasCalled = false
         var stopWasCalled = false
         
@@ -32,6 +33,11 @@ class PresenterTests: XCTestCase {
         var enableStopButtonWasCalled = false
         var enableStopButtonArgument:Bool = true
         
+        var displayAmbientTemperatureWasCalled = false
+        var displayAmbientTemperatureArgument:Double = -88.8
+        var displayInfraredTemperatureWasCalled = false
+        var displayInfraredTemperatureArgument:Double = -99.9
+        
         func enableStartButton(_ enable: Bool){
             enableStartButtonWasCalled = true
             enableStartButtonArgument = enable
@@ -39,6 +45,16 @@ class PresenterTests: XCTestCase {
         func enableStopButton(_ enable: Bool){
             enableStopButtonWasCalled = true
             enableStopButtonArgument = enable
+        }
+        
+        func displayAmbient(temperature: Double) {
+            displayAmbientTemperatureWasCalled = true
+            displayAmbientTemperatureArgument = temperature
+        }
+        
+        func displayInfrared(temperature: Double) {
+            displayInfraredTemperatureWasCalled = true
+            displayInfraredTemperatureArgument = temperature
         }
     }
     
@@ -66,7 +82,9 @@ class PresenterTests: XCTestCase {
     }
     
     func testStart() {
+        // when
         presenter.onStartButtonPressed()
+        //then
         XCTAssertTrue(mockSensorTag.startWasCalled)
         XCTAssertTrue(mockView.enableStopButtonWasCalled)
         XCTAssertTrue(mockView.enableStopButtonArgument)
@@ -75,7 +93,9 @@ class PresenterTests: XCTestCase {
     }
     
     func testStop() {
+        // when
         presenter.onStopButtonPressed()
+        // then
         XCTAssertTrue(mockSensorTag.stopWasCalled)
         XCTAssertTrue(mockView.enableStopButtonWasCalled)
         XCTAssertFalse(mockView.enableStopButtonArgument)
@@ -84,10 +104,28 @@ class PresenterTests: XCTestCase {
     }
     
     func testOnCreate() {
+        // when
         let returned = presenter.onCreate(mockView)
+        // then
         XCTAssertTrue(returned === presenter)
         XCTAssertTrue(mockView === presenter.ui)
         XCTAssertTrue(mockView.enableStopButtonWasCalled)
         XCTAssertFalse(mockView.enableStopButtonArgument)
+        XCTAssertNotNil(mockSensorTag.delegate)
+        XCTAssertTrue(mockSensorTag.delegate as? Presenter === presenter)
+    }
+    
+    func testOnTemperature() {
+        // given
+        let ambientTemp = 22.23452
+        let infraredTemp = 16.76234
+        let temperatures = (ambient:ambientTemp ,infrared:infraredTemp)
+        // when
+        presenter.on(temperature: temperatures)
+        // then
+        XCTAssertTrue(mockView.displayAmbientTemperatureWasCalled)
+        XCTAssertEqual(mockView.displayAmbientTemperatureArgument, ambientTemp)
+        XCTAssertTrue(mockView.displayInfraredTemperatureWasCalled)
+        XCTAssertEqual(mockView.displayInfraredTemperatureArgument, infraredTemp)
     }
 }

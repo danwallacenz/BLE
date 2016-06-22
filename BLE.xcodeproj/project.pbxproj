@@ -19,6 +19,7 @@
 		3C26C6921D18E4EA0080EA44 /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26C6911D18E4EA0080EA44 /* BLEManager.swift */; };
 		3C4DFB6A1D1A403D00D01618 /* SensorTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4DFB691D1A403D00D01618 /* SensorTag.swift */; };
 		3C4DFB6C1D1A413200D01618 /* PresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4DFB6B1D1A413200D01618 /* PresenterTests.swift */; };
+		3CB846381D1A4ED000786E33 /* SensorTagDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB846371D1A4ED000786E33 /* SensorTagDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		3C26C6911D18E4EA0080EA44 /* BLEManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
 		3C4DFB691D1A403D00D01618 /* SensorTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorTag.swift; sourceTree = "<group>"; };
 		3C4DFB6B1D1A413200D01618 /* PresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterTests.swift; sourceTree = "<group>"; };
+		3CB846371D1A4ED000786E33 /* SensorTagDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorTagDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 			children = (
 				3C26C6911D18E4EA0080EA44 /* BLEManager.swift */,
 				3C4DFB691D1A403D00D01618 /* SensorTag.swift */,
+				3CB846371D1A4ED000786E33 /* SensorTagDelegate.swift */,
 			);
 			name = Bluetooth;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CB846381D1A4ED000786E33 /* SensorTagDelegate.swift in Sources */,
 				3C26C68D1D18D5010080EA44 /* Presenter.swift in Sources */,
 				3C26C6611D18D4CF0080EA44 /* ViewController.swift in Sources */,
 				3C26C6921D18E4EA0080EA44 /* BLEManager.swift in Sources */,
