@@ -9,7 +9,7 @@
 import Foundation
 import CoreBluetooth
 
-class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, SensorTag {
+class BLEManager: NSObject, SensorTagInterface {
     
     let SENSOR_TAG_NAME = "SensorTag"
     
@@ -48,23 +48,66 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Sens
         print("stopped scanning")
     }
     
-    // MARK: CBCentralManagerDelegate
+// MARK: utils
+    
+    func publish(stateFor peripheral: CBPeripheral){
+        var state = ""
+        switch peripheral.state {
+        case .disconnected:
+            state = "Disconnected"
+        case .connecting:
+            state = "Connecting"
+        case .connected:
+            state = "Connected"
+        case .disconnecting:
+            state = "Disconnecting"
+        }
+        delegate?.on(status: state)
+    }
+    
+    func publish(_ error: NSError){
+        delegate?.on(error: error.localizedDescription)
+    }
+
+    func temperature(from dataBytes: Data) -> (ambient: Double, infrared: Double) {
+        
+        let SENSOR_DATA_INDEX_TEMP_INFRARED  = 0
+        let SENSOR_DATA_INDEX_TEMP_AMBIENT = 1
+        
+        let dataLength = dataBytes.count / 2
+        var dataArray = [UInt16](repeating: 0, count: dataLength)
+        (dataBytes as NSData).getBytes(&dataArray, length: dataLength * sizeof(UInt16));
+        
+        let rawAmbientTemp = dataArray[SENSOR_DATA_INDEX_TEMP_AMBIENT]
+        let ambientTempInCelcius = Double(rawAmbientTemp) / 128
+        
+        let rawInfraredTemp = dataArray[SENSOR_DATA_INDEX_TEMP_INFRARED]
+        let irTempInCelcius = Double(rawInfraredTemp) / 128
+        
+        let temperatures = (ambient:ambientTempInCelcius ,infrared: irTempInCelcius)
+        return temperatures
+    }
+}
+
+// MARK: CBCentralManagerDelegate
+extension BLEManager: CBCentralManagerDelegate {
+
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         
         var state = ""
         switch central.state {
-            case .unsupported:
-                state = "This device does not support Bluetooth Low Energy"
-            case .unauthorized:
-                state = "This app is not authorized to use Bluetooth Low Energy"
-            case .poweredOff:
-                state = "Bluetooth on this device is currently powered off"
-            case .resetting:
-                state = "The BLE Manager is resetting; a state update is pending"
-            case .poweredOn:
-                state = "Bluetooth LE is turned on and ready for communication"
-            case .unknown:
-                state = "The state of the BLE Manager is unknown"
+        case .unsupported:
+            state = "This device does not support Bluetooth Low Energy"
+        case .unauthorized:
+            state = "This app is not authorized to use Bluetooth Low Energy"
+        case .poweredOff:
+            state = "Bluetooth on this device is currently powered off"
+        case .resetting:
+            state = "The BLE Manager is resetting; a state update is pending"
+        case .poweredOn:
+            state = "Bluetooth LE is turned on and ready for communication"
+        case .unknown:
+            state = "The state of the BLE Manager is unknown"
         }
         delegate?.on(status: state)
     }
@@ -109,9 +152,11 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Sens
         publish(stateFor: peripheral)
         print("didDisconnectPeripheral")
     }
-    
-    
-    // MARK: CBPeripheralDelegate
+}
+
+// MARK: CBPeripheralDelegate
+extension BLEManager: CBPeripheralDelegate {
+
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: NSError?) {
         print("didDiscoverServices")
         if let error = error {
@@ -165,45 +210,5 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Sens
                 delegate?.on(temperature: temperatures)
             }
         }
-    }
-    
-    // MARK: utils
-    
-    func publish(stateFor peripheral: CBPeripheral){
-        var state = ""
-        switch peripheral.state {
-        case .disconnected:
-            state = "Disconnected"
-        case .connecting:
-            state = "Connecting"
-        case .connected:
-            state = "Connected"
-        case .disconnecting:
-            state = "Disconnecting"
-        }
-        delegate?.on(status: state)
-    }
-    
-    func publish(_ error: NSError){
-        delegate?.on(error: error.localizedDescription)
-    }
-
-    func temperature(from dataBytes: Data) -> (ambient: Double, infrared: Double) {
-        
-        let SENSOR_DATA_INDEX_TEMP_INFRARED  = 0
-        let SENSOR_DATA_INDEX_TEMP_AMBIENT = 1
-        
-        let dataLength = dataBytes.count / 2
-        var dataArray = [UInt16](repeating: 0, count: dataLength)
-        (dataBytes as NSData).getBytes(&dataArray, length: dataLength * sizeof(UInt16));
-        
-        let rawAmbientTemp = dataArray[SENSOR_DATA_INDEX_TEMP_AMBIENT]
-        let ambientTempInCelcius = Double(rawAmbientTemp) / 128
-        
-        let rawInfraredTemp = dataArray[SENSOR_DATA_INDEX_TEMP_INFRARED]
-        let irTempInCelcius = Double(rawInfraredTemp) / 128
-        
-        let temperatures = (ambient:ambientTempInCelcius ,infrared: irTempInCelcius)
-        return temperatures
     }
 }

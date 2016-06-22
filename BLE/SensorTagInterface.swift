@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SensorTag {
+protocol SensorTagInterface {
     func start()
     func stop()
     var delegate: SensorTagDelegate? { get set }

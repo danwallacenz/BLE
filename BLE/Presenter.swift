@@ -11,7 +11,7 @@ import Foundation
 class Presenter: SensorTagDelegate {
     
     weak var ui: UIInterface? = nil
-    var sensorTag:SensorTag = BLEManager()
+    var sensorTag:SensorTagInterface = BLEManager()
     
     func onCreate(_ ui:UIInterface) -> Presenter {
         self.ui = ui
