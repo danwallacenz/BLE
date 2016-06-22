@@ -25,7 +25,7 @@ class PresenterTests: XCTestCase {
         }
     }
     
-    class View:UIInterface {
+    class MockView:UIInterface {
         
         var enableStartButtonWasCalled = false
         var enableStartButtonArgument:Bool = false
@@ -43,33 +43,44 @@ class PresenterTests: XCTestCase {
     }
     
     var mockSensorTag:MockSensorTag!
-    var mockView:View!
+    var mockView:MockView!
     var presenter:Presenter!
     
     override func setUp() {
         super.setUp()
+        
         presenter = Presenter()
 
         mockSensorTag = MockSensorTag()
         presenter.sensorTag = mockSensorTag
         
-        mockView = View()
+        mockView = MockView()
+        let _ = presenter.onCreate(mockView)
     }
     
     override func tearDown() {
         mockSensorTag = nil
         presenter = nil
+        mockView = nil
         super.tearDown()
     }
     
     func testStart() {
         presenter.onStartButtonPressed()
         XCTAssertTrue(mockSensorTag.startWasCalled)
+        XCTAssertTrue(mockView.enableStopButtonWasCalled)
+        XCTAssertTrue(mockView.enableStopButtonArgument)
+        XCTAssertTrue(mockView.enableStartButtonWasCalled)
+        XCTAssertFalse(mockView.enableStartButtonArgument)
     }
     
     func testStop() {
         presenter.onStopButtonPressed()
         XCTAssertTrue(mockSensorTag.stopWasCalled)
+        XCTAssertTrue(mockView.enableStopButtonWasCalled)
+        XCTAssertFalse(mockView.enableStopButtonArgument)
+        XCTAssertTrue(mockView.enableStartButtonWasCalled)
+        XCTAssertTrue(mockView.enableStartButtonArgument)
     }
     
     func testOnCreate() {
