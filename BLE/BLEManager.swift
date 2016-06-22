@@ -28,11 +28,10 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     let UUID_HUMIDITY_DATA    = "F000AA21-0451-4000-B000-000000000000"
     let UUID_HUMIDITY_CONFIG  = "F000AA22-0451-4000-B000-000000000000"
     
-    
     var centralManager:CBCentralManager!
     var sensorTag: CBPeripheral?
     
-    override init() {
+     override init() {
         super.init()
         centralManager = CBCentralManager(delegate: self, queue: nil)
     }
@@ -110,7 +109,7 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                 if characteristic.uuid .isEqual(CBUUID(string: UUID_TEMPERATURE_CONFIG)) {
                     // Enable Temperature Sensor
                     var enableValue:UInt8 = 1
-                    let enableBytes = Data(bytes: UnsafePointer<UInt8>(&enableValue), count: sizeof(UInt8))
+                    let enableBytes = Data(bytes: &enableValue, count: sizeof(UInt8))
 
                     sensorTag?.writeValue(enableBytes, for: characteristic, type: CBCharacteristicWriteType.withResponse)
 
@@ -125,16 +124,26 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         if let error = error {
             print("error:\(error.localizedDescription)")
         } else{
-        
             // extract the data from the characteristic's value property and display the value based on the characteristic type
-            let data = characteristic.value
-            var rawData : UInt16 = 0
-            (data as NSData?)?.getBytes(&rawData, length: sizeof(UInt16));
-            let lower = 0x00FF & rawData;
-            let upper = rawData>>8
-            print("temperature data: \(data) for characteristic: \(characteristic.uuid)")
-            print("temperature lower: \(lower) upper: \(upper)")
+            if let data = characteristic.value {
+                let temperatures = temperature(from: data)
+                print("ambient temp is \(temperatures.ambient)º C")
+                print("infra red temp is \(temperatures.ir)º C")
+            }
         }
-        
+    }
+    
+    func temperature(from dataBytes: Data) -> (ambient: Double, ir: Double) {
+        let SENSOR_DATA_INDEX_TEMP_INFRARED  = 0
+        let SENSOR_DATA_INDEX_TEMP_AMBIENT = 1
+        let dataLength = dataBytes.count / 2
+        var dataArray = [UInt16](repeating: 0, count: dataLength)
+        (dataBytes as NSData).getBytes(&dataArray, length: dataLength * sizeof(UInt16));
+        let rawAmbientTemp = dataArray[SENSOR_DATA_INDEX_TEMP_AMBIENT]
+        let ambientTempInCelcius = Double(rawAmbientTemp) / 128
+        let rawIRTemp = dataArray[SENSOR_DATA_INDEX_TEMP_INFRARED]
+        let irTempInCelcius = Double(rawIRTemp) / 128
+        let temperatures = (ambient:ambientTempInCelcius ,ir: irTempInCelcius)
+        return temperatures
     }
 }
