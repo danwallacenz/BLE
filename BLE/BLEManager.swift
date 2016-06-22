@@ -9,7 +9,7 @@
 import Foundation
 import CoreBluetooth
 
-class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
+class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, SensorTag {
     
     let SENSOR_TAG_NAME = "SensorTag"
     
@@ -127,13 +127,13 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             // extract the data from the characteristic's value property and display the value based on the characteristic type
             if let data = characteristic.value {
                 let temperatures = temperature(from: data)
-                print("ambient temp is \(temperatures.ambient)º C")
-                print("infra red temp is \(temperatures.ir)º C")
+                print("ambient temp is \(round(10 * temperatures.ambient) / 10))º C") // 1 decimal place
+                print("infrared temp is \(round(10 * temperatures.infrared) / 10)º C")
             }
         }
     }
     
-    func temperature(from dataBytes: Data) -> (ambient: Double, ir: Double) {
+    func temperature(from dataBytes: Data) -> (ambient: Double, infrared: Double) {
         let SENSOR_DATA_INDEX_TEMP_INFRARED  = 0
         let SENSOR_DATA_INDEX_TEMP_AMBIENT = 1
         let dataLength = dataBytes.count / 2
@@ -143,7 +143,7 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         let ambientTempInCelcius = Double(rawAmbientTemp) / 128
         let rawIRTemp = dataArray[SENSOR_DATA_INDEX_TEMP_INFRARED]
         let irTempInCelcius = Double(rawIRTemp) / 128
-        let temperatures = (ambient:ambientTempInCelcius ,ir: irTempInCelcius)
+        let temperatures = (ambient:ambientTempInCelcius ,infrared: irTempInCelcius)
         return temperatures
     }
 }

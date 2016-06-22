@@ -11,7 +11,7 @@ import Foundation
 class Presenter {
     
     weak var ui: UIInterface? = nil
-    let  bluetoothManager = BLEManager()
+    var sensorTag:SensorTag = BLEManager()
     
     func onCreate(_ ui:UIInterface) -> Presenter {
         self.ui = ui
@@ -22,12 +22,12 @@ class Presenter {
     func onStartButtonPressed() {
         ui?.enableStartButton(false)
         ui?.enableStopButton(true)
-        bluetoothManager.start()
+        sensorTag.start()
     }
     
     func onStopButtonPressed() {
         ui?.enableStartButton(true)
         ui?.enableStopButton(false)
-        bluetoothManager.stop()
+        sensorTag.stop()
     }
 }
