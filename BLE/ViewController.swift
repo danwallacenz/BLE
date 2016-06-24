@@ -52,12 +52,12 @@ class ViewController: UIViewController, UIInterface {
     
     func displayAmbient(temperature: Double) {
         let roundedTemp = round(10 * temperature) / 10 // 1 decimal place
-        ambientTemperatureLabel.text = "\(roundedTemp)º C"
+        ambientTemperatureLabel.text = "\(roundedTemp)ºC"
     }
     
     func displayInfrared(temperature: Double) {
         let roundedTemp = round(10 * temperature) / 10
-        infraredTemperatureLabel.text = "\(roundedTemp)º C"
+        infraredTemperatureLabel.text = "\(roundedTemp)ºC"
     }
     
     func display(error: String) {

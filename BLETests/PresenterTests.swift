@@ -11,7 +11,7 @@ import XCTest
 
 class PresenterTests: XCTestCase {
     
-    class MockSensorTag:SensorTag {
+    class MockSensorTag:SensorTagInterface {
         
         var delegate: SensorTagDelegate?
         var startWasCalled = false
